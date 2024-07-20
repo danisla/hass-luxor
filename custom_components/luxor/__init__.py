@@ -34,7 +34,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     api_instance = controller_api.ControllerApi(api_client)
 
     try:
-        api_response = await api_instance.controller_name()
+        for i in range(5):
+            api_response = await api_instance.controller_name()
+            asyncio.sleep(1)
+            break
     except luxor_openapi_asyncio.ApiException as e:
         raise ConfigEntryNotReady from e
 
